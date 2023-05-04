@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-3"><a href="functions-can-be-like-personalized-mini-packages.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> Frax_dat, <span class="fu">aes</span>(<span class="at">x =</span> decimalLongitude, <span class="at">y =</span> decimalLatitude),</span>
 <span id="cb3-4"><a href="functions-can-be-like-personalized-mini-packages.html#cb3-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb3-5"><a href="functions-can-be-like-personalized-mini-packages.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(Frax_dat<span class="sc">$</span>scientificName)</span></code></pre></div>
-<p><img src="00_dist_map_fx_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="01_dist_map_fx_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>This is a fairly easy piece of code to turn into a function. If I were to do this with a different species, the only peice of information that changes is the speices name. So in my function, that is what I specify as the variable.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="functions-can-be-like-personalized-mini-packages.html#cb4-1" aria-hidden="true" tabindex="-1"></a> dist_map <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb4-2"><a href="functions-can-be-like-personalized-mini-packages.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  GBIFdata <span class="ot">=</span> <span class="fu">occ_search</span>(<span class="at">scientificName =</span> x, <span class="at">limit =</span> <span class="dv">300</span>, <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>, <span class="at">basisOfRecord =</span> <span class="st">&quot;PRESERVED_SPECIMEN&quot;</span>)</span>
@@ -196,13 +196,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-11"><a href="functions-can-be-like-personalized-mini-packages.html#cb4-11" aria-hidden="true" tabindex="-1"></a> }</span></code></pre></div>
 <p>Now when I want a species range map I can just use one line of code</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="functions-can-be-like-personalized-mini-packages.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dist_map</span>(<span class="st">&quot;Fremontodendron californicum&quot;</span>)</span></code></pre></div>
-<p><img src="00_dist_map_fx_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="01_dist_map_fx_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>I can save that function to a separate script if I want to use it again in the future. I have a directory for my functions “~Desktop/R-functions” where I saved it.</p>
 <p>Now I can call it in any of my other script using the source() function.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="functions-can-be-like-personalized-mini-packages.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;~/Desktop/R_functions/dist_map.R&quot;</span>)</span>
 <span id="cb6-2"><a href="functions-can-be-like-personalized-mini-packages.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="functions-can-be-like-personalized-mini-packages.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dist_map</span>(<span class="st">&quot;Fremontodendron californicum&quot;</span>)</span></code></pre></div>
-<p><img src="00_dist_map_fx_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="01_dist_map_fx_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 
 </div>
             </section>
@@ -232,7 +232,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/d-rug/realworld_functions2/edit/master/00_dist_map_fx.Rmd",
+"link": "https://github.com/d-rug/realworld_functions2/edit/master/01_dist_map_fx.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -240,7 +240,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/d-rug/realworld_functions2/blob/master/00_dist_map_fx.Rmd",
+"link": "https://github.com/d-rug/realworld_functions2/blob/master/01_dist_map_fx.Rmd",
 "text": null
 },
 "download": null,
