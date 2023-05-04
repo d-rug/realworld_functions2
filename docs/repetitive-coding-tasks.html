@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Repetitive coding tasks | Real-world function writing</title>
   <meta name="description" content="Repetitive coding tasks | Real-world function writing" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Repetitive coding tasks | Real-world function writing" />
   <meta property="og:type" content="book" />
   
   
-  <meta name="github-repo" content="d-rug/realworld_functions_iteration" />
+  <meta name="github-repo" content="d-rug/realworld_functions2" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Repetitive coding tasks | Real-world function writing" />
@@ -23,14 +23,14 @@
 <meta name="author" content="Liza Wood" />
 
 
-<meta name="date" content="2022-10-05" />
+<meta name="date" content="2023-05-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
+<link rel="prev" href="functions-can-be-like-personalized-mini-packages.html"/>
 <link rel="next" href="function-writing.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -92,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -139,10 +139,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="functions-can-be-like-personalized-mini-packages.html"><a href="functions-can-be-like-personalized-mini-packages.html"><i class="fa fa-check"></i>Functions can be like personalized Mini Packages</a></li>
 <li class="chapter" data-level="" data-path="repetitive-coding-tasks.html"><a href="repetitive-coding-tasks.html"><i class="fa fa-check"></i>Repetitive coding tasks</a></li>
 <li class="chapter" data-level="" data-path="function-writing.html"><a href="function-writing.html"><i class="fa fa-check"></i>Function writing</a></li>
-<li class="chapter" data-level="" data-path="iterating.html"><a href="iterating.html"><i class="fa fa-check"></i>Iterating</a></li>
-<li class="chapter" data-level="" data-path="putting-it-together.html"><a href="putting-it-together.html"><i class="fa fa-check"></i>Putting it together</a></li>
 <li class="divider"></li>
 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
   <img alt="CC BY-SA 4.0" src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg" style="float: right; padding-right: 10px;" />
@@ -167,81 +166,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="repetitive-coding-tasks" class="section level1 unnumbered hasAnchor">
 <h1>Repetitive coding tasks<a href="repetitive-coding-tasks.html#repetitive-coding-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>You may often find yourself in a situation where you need to do the same thing (or set of things) in R, over and over again. This is true in my (real-world) example of working with US patent data. This (very clunky) database allows you to download all of the patents granted <strong>by week</strong>. What’s more is that the data are not so clean, and so each csv requires some cleaning be done on each of them. So if we wanted to aggregate clean patent data over multiple weeks, months, or years, we would need to run the same chunk of code (reading in and cleaning the data) over 100 times, each time with only minor alteration. This is the kind of thing that we can use function writing and iteration to our advantage.</p>
+<p>The second thing functions are super useful for is iterating processes. Sometime we need to run the same few lines of code hundreds of times.</p>
+<p>This is true in this (real-world) example of working with US patent data. This (very clunky) database allows you to download all of the patents granted <strong>by week</strong>. What’s more is that the data are not so clean, and so each csv requires some cleaning be done on each of them. So if we wanted to aggregate clean patent data over multiple weeks, months, or years, we would need to run the same chunk of code (reading in and cleaning the data) over 100 times, each time with only minor alteration. This is the kind of thing that we can use function writing and iteration to our advantage.</p>
 <p>Note: How should we even be reading in and storing lots of data like this? I store my data on Box and download the Box app onto my computer so that I can find an easy filepath there. Here are the files I am working with for this example: 104 weeks of US patent data for 1977 and 1978</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="repetitive-coding-tasks.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;~/Box/d-rug/data/&quot;</span>)</span></code></pre></div>
-<pre><code>##   [1] &quot;uspto_1977_1.csv&quot;  &quot;uspto_1977_10.csv&quot; &quot;uspto_1977_11.csv&quot;
-##   [4] &quot;uspto_1977_12.csv&quot; &quot;uspto_1977_13.csv&quot; &quot;uspto_1977_14.csv&quot;
-##   [7] &quot;uspto_1977_15.csv&quot; &quot;uspto_1977_16.csv&quot; &quot;uspto_1977_17.csv&quot;
-##  [10] &quot;uspto_1977_18.csv&quot; &quot;uspto_1977_19.csv&quot; &quot;uspto_1977_2.csv&quot; 
-##  [13] &quot;uspto_1977_20.csv&quot; &quot;uspto_1977_21.csv&quot; &quot;uspto_1977_22.csv&quot;
-##  [16] &quot;uspto_1977_23.csv&quot; &quot;uspto_1977_24.csv&quot; &quot;uspto_1977_25.csv&quot;
-##  [19] &quot;uspto_1977_26.csv&quot; &quot;uspto_1977_27.csv&quot; &quot;uspto_1977_28.csv&quot;
-##  [22] &quot;uspto_1977_29.csv&quot; &quot;uspto_1977_3.csv&quot;  &quot;uspto_1977_30.csv&quot;
-##  [25] &quot;uspto_1977_31.csv&quot; &quot;uspto_1977_32.csv&quot; &quot;uspto_1977_33.csv&quot;
-##  [28] &quot;uspto_1977_34.csv&quot; &quot;uspto_1977_35.csv&quot; &quot;uspto_1977_36.csv&quot;
-##  [31] &quot;uspto_1977_37.csv&quot; &quot;uspto_1977_38.csv&quot; &quot;uspto_1977_39.csv&quot;
-##  [34] &quot;uspto_1977_4.csv&quot;  &quot;uspto_1977_40.csv&quot; &quot;uspto_1977_41.csv&quot;
-##  [37] &quot;uspto_1977_42.csv&quot; &quot;uspto_1977_43.csv&quot; &quot;uspto_1977_44.csv&quot;
-##  [40] &quot;uspto_1977_45.csv&quot; &quot;uspto_1977_46.csv&quot; &quot;uspto_1977_47.csv&quot;
-##  [43] &quot;uspto_1977_48.csv&quot; &quot;uspto_1977_49.csv&quot; &quot;uspto_1977_5.csv&quot; 
-##  [46] &quot;uspto_1977_50.csv&quot; &quot;uspto_1977_51.csv&quot; &quot;uspto_1977_52.csv&quot;
-##  [49] &quot;uspto_1977_6.csv&quot;  &quot;uspto_1977_7.csv&quot;  &quot;uspto_1977_8.csv&quot; 
-##  [52] &quot;uspto_1977_9.csv&quot;  &quot;uspto_1978_1.csv&quot;  &quot;uspto_1978_10.csv&quot;
-##  [55] &quot;uspto_1978_11.csv&quot; &quot;uspto_1978_12.csv&quot; &quot;uspto_1978_13.csv&quot;
-##  [58] &quot;uspto_1978_14.csv&quot; &quot;uspto_1978_15.csv&quot; &quot;uspto_1978_16.csv&quot;
-##  [61] &quot;uspto_1978_17.csv&quot; &quot;uspto_1978_18.csv&quot; &quot;uspto_1978_19.csv&quot;
-##  [64] &quot;uspto_1978_2.csv&quot;  &quot;uspto_1978_20.csv&quot; &quot;uspto_1978_21.csv&quot;
-##  [67] &quot;uspto_1978_22.csv&quot; &quot;uspto_1978_23.csv&quot; &quot;uspto_1978_24.csv&quot;
-##  [70] &quot;uspto_1978_25.csv&quot; &quot;uspto_1978_26.csv&quot; &quot;uspto_1978_27.csv&quot;
-##  [73] &quot;uspto_1978_28.csv&quot; &quot;uspto_1978_29.csv&quot; &quot;uspto_1978_3.csv&quot; 
-##  [76] &quot;uspto_1978_30.csv&quot; &quot;uspto_1978_31.csv&quot; &quot;uspto_1978_32.csv&quot;
-##  [79] &quot;uspto_1978_33.csv&quot; &quot;uspto_1978_34.csv&quot; &quot;uspto_1978_35.csv&quot;
-##  [82] &quot;uspto_1978_36.csv&quot; &quot;uspto_1978_37.csv&quot; &quot;uspto_1978_38.csv&quot;
-##  [85] &quot;uspto_1978_39.csv&quot; &quot;uspto_1978_4.csv&quot;  &quot;uspto_1978_40.csv&quot;
-##  [88] &quot;uspto_1978_41.csv&quot; &quot;uspto_1978_42.csv&quot; &quot;uspto_1978_43.csv&quot;
-##  [91] &quot;uspto_1978_44.csv&quot; &quot;uspto_1978_45.csv&quot; &quot;uspto_1978_46.csv&quot;
-##  [94] &quot;uspto_1978_47.csv&quot; &quot;uspto_1978_48.csv&quot; &quot;uspto_1978_49.csv&quot;
-##  [97] &quot;uspto_1978_5.csv&quot;  &quot;uspto_1978_50.csv&quot; &quot;uspto_1978_51.csv&quot;
-## [100] &quot;uspto_1978_52.csv&quot; &quot;uspto_1978_6.csv&quot;  &quot;uspto_1978_7.csv&quot; 
-## [103] &quot;uspto_1978_8.csv&quot;  &quot;uspto_1978_9.csv&quot;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="repetitive-coding-tasks.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">&quot;~/Box/d-rug/data&quot;</span>)</span></code></pre></div>
+<pre><code>##   [1] &quot;uspto_1977_10.csv&quot; &quot;uspto_1977_11.csv&quot; &quot;uspto_1977_12.csv&quot;
+##   [4] &quot;uspto_1977_13.csv&quot; &quot;uspto_1977_14.csv&quot; &quot;uspto_1977_15.csv&quot;
+##   [7] &quot;uspto_1977_16.csv&quot; &quot;uspto_1977_17.csv&quot; &quot;uspto_1977_18.csv&quot;
+##  [10] &quot;uspto_1977_19.csv&quot; &quot;uspto_1977_20.csv&quot; &quot;uspto_1977_21.csv&quot;
+##  [13] &quot;uspto_1977_22.csv&quot; &quot;uspto_1977_23.csv&quot; &quot;uspto_1977_24.csv&quot;
+##  [16] &quot;uspto_1977_25.csv&quot; &quot;uspto_1977_26.csv&quot; &quot;uspto_1977_27.csv&quot;
+##  [19] &quot;uspto_1977_28.csv&quot; &quot;uspto_1977_29.csv&quot; &quot;uspto_1977_3.csv&quot; 
+##  [22] &quot;uspto_1977_30.csv&quot; &quot;uspto_1977_31.csv&quot; &quot;uspto_1977_32.csv&quot;
+##  [25] &quot;uspto_1977_33.csv&quot; &quot;uspto_1977_34.csv&quot; &quot;uspto_1977_35.csv&quot;
+##  [28] &quot;uspto_1977_36.csv&quot; &quot;uspto_1977_37.csv&quot; &quot;uspto_1977_38.csv&quot;
+##  [31] &quot;uspto_1977_39.csv&quot; &quot;uspto_1977_4.csv&quot;  &quot;uspto_1977_40.csv&quot;
+##  [34] &quot;uspto_1977_41.csv&quot; &quot;uspto_1977_42.csv&quot; &quot;uspto_1977_43.csv&quot;
+##  [37] &quot;uspto_1977_44.csv&quot; &quot;uspto_1977_45.csv&quot; &quot;uspto_1977_46.csv&quot;
+##  [40] &quot;uspto_1977_47.csv&quot; &quot;uspto_1977_48.csv&quot; &quot;uspto_1977_49.csv&quot;
+##  [43] &quot;uspto_1977_5.csv&quot;  &quot;uspto_1977_50.csv&quot; &quot;uspto_1977_51.csv&quot;
+##  [46] &quot;uspto_1977_52.csv&quot; &quot;uspto_1977_6.csv&quot;  &quot;uspto_1977_7.csv&quot; 
+##  [49] &quot;uspto_1977_8.csv&quot;  &quot;uspto_1977_9.csv&quot;  &quot;uspto_1978_10.csv&quot;
+##  [52] &quot;uspto_1978_11.csv&quot; &quot;uspto_1978_12.csv&quot; &quot;uspto_1978_13.csv&quot;
+##  [55] &quot;uspto_1978_14.csv&quot; &quot;uspto_1978_15.csv&quot; &quot;uspto_1978_16.csv&quot;
+##  [58] &quot;uspto_1978_17.csv&quot; &quot;uspto_1978_18.csv&quot; &quot;uspto_1978_19.csv&quot;
+##  [61] &quot;uspto_1978_20.csv&quot; &quot;uspto_1978_21.csv&quot; &quot;uspto_1978_22.csv&quot;
+##  [64] &quot;uspto_1978_23.csv&quot; &quot;uspto_1978_24.csv&quot; &quot;uspto_1978_25.csv&quot;
+##  [67] &quot;uspto_1978_26.csv&quot; &quot;uspto_1978_27.csv&quot; &quot;uspto_1978_28.csv&quot;
+##  [70] &quot;uspto_1978_29.csv&quot; &quot;uspto_1978_3.csv&quot;  &quot;uspto_1978_30.csv&quot;
+##  [73] &quot;uspto_1978_31.csv&quot; &quot;uspto_1978_32.csv&quot; &quot;uspto_1978_33.csv&quot;
+##  [76] &quot;uspto_1978_34.csv&quot; &quot;uspto_1978_35.csv&quot; &quot;uspto_1978_36.csv&quot;
+##  [79] &quot;uspto_1978_37.csv&quot; &quot;uspto_1978_38.csv&quot; &quot;uspto_1978_39.csv&quot;
+##  [82] &quot;uspto_1978_4.csv&quot;  &quot;uspto_1978_40.csv&quot; &quot;uspto_1978_41.csv&quot;
+##  [85] &quot;uspto_1978_42.csv&quot; &quot;uspto_1978_43.csv&quot; &quot;uspto_1978_44.csv&quot;
+##  [88] &quot;uspto_1978_45.csv&quot; &quot;uspto_1978_46.csv&quot; &quot;uspto_1978_47.csv&quot;
+##  [91] &quot;uspto_1978_48.csv&quot; &quot;uspto_1978_49.csv&quot; &quot;uspto_1978_5.csv&quot; 
+##  [94] &quot;uspto_1978_50.csv&quot; &quot;uspto_1978_51.csv&quot; &quot;uspto_1978_52.csv&quot;
+##  [97] &quot;uspto_1978_6.csv&quot;  &quot;uspto_1978_7.csv&quot;  &quot;uspto_1978_8.csv&quot; 
+## [100] &quot;uspto_1978_9.csv&quot;</code></pre>
 <p>What would this look like if I were to go through each files one by one…</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="repetitive-coding-tasks.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in that lubridate package first</span></span>
-<span id="cb3-2"><a href="repetitive-coding-tasks.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb3-3"><a href="repetitive-coding-tasks.html#cb3-3" aria-hidden="true" tabindex="-1"></a>patent77_1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/Box/d-rug/data/uspto_1977_1.csv&quot;</span>)</span>
-<span id="cb3-4"><a href="repetitive-coding-tasks.html#cb3-4" aria-hidden="true" tabindex="-1"></a>patent77_1<span class="sc">$</span>App_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_1<span class="sc">$</span>App_Date))</span>
-<span id="cb3-5"><a href="repetitive-coding-tasks.html#cb3-5" aria-hidden="true" tabindex="-1"></a>patent77_1<span class="sc">$</span>Issue_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_1<span class="sc">$</span>Issue_Date))</span>
-<span id="cb3-6"><a href="repetitive-coding-tasks.html#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="repetitive-coding-tasks.html#cb3-7" aria-hidden="true" tabindex="-1"></a>patent77_2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/Box/d-rug/data/uspto_1977_2.csv&quot;</span>)</span>
-<span id="cb3-8"><a href="repetitive-coding-tasks.html#cb3-8" aria-hidden="true" tabindex="-1"></a>patent77_2<span class="sc">$</span>App_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_2<span class="sc">$</span>App_Date))</span>
-<span id="cb3-9"><a href="repetitive-coding-tasks.html#cb3-9" aria-hidden="true" tabindex="-1"></a>patent77_2<span class="sc">$</span>Issue_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_2<span class="sc">$</span>Issue_Date))</span>
-<span id="cb3-10"><a href="repetitive-coding-tasks.html#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="repetitive-coding-tasks.html#cb3-11" aria-hidden="true" tabindex="-1"></a>patent77_3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/Box/d-rug/data/uspto_1977_3.csv&quot;</span>)</span>
-<span id="cb3-12"><a href="repetitive-coding-tasks.html#cb3-12" aria-hidden="true" tabindex="-1"></a>patent77_3<span class="sc">$</span>App_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_3<span class="sc">$</span>App_Date))</span>
-<span id="cb3-13"><a href="repetitive-coding-tasks.html#cb3-13" aria-hidden="true" tabindex="-1"></a>patent77_3<span class="sc">$</span>Issue_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_3<span class="sc">$</span>Issue_Date))</span>
-<span id="cb3-14"><a href="repetitive-coding-tasks.html#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="repetitive-coding-tasks.html#cb3-15" aria-hidden="true" tabindex="-1"></a>patent77_4 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/Box/d-rug/data/uspto_1977_4.csv&quot;</span>)</span>
-<span id="cb3-16"><a href="repetitive-coding-tasks.html#cb3-16" aria-hidden="true" tabindex="-1"></a>patent77_4<span class="sc">$</span>App_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_4<span class="sc">$</span>App_Date))</span>
-<span id="cb3-17"><a href="repetitive-coding-tasks.html#cb3-17" aria-hidden="true" tabindex="-1"></a>patent77_4<span class="sc">$</span>Issue_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_4<span class="sc">$</span>Issue_Date))</span>
-<span id="cb3-18"><a href="repetitive-coding-tasks.html#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># and so on ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="repetitive-coding-tasks.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in that lubridate package first</span></span>
+<span id="cb9-2"><a href="repetitive-coding-tasks.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb9-3"><a href="repetitive-coding-tasks.html#cb9-3" aria-hidden="true" tabindex="-1"></a>patent77_1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/Box/d-rug/data/uspto_1977_10.csv&quot;</span>)</span>
+<span id="cb9-4"><a href="repetitive-coding-tasks.html#cb9-4" aria-hidden="true" tabindex="-1"></a>patent77_1<span class="sc">$</span>App_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_1<span class="sc">$</span>App_Date))</span>
+<span id="cb9-5"><a href="repetitive-coding-tasks.html#cb9-5" aria-hidden="true" tabindex="-1"></a>patent77_1<span class="sc">$</span>Issue_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_1<span class="sc">$</span>Issue_Date))</span>
+<span id="cb9-6"><a href="repetitive-coding-tasks.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="repetitive-coding-tasks.html#cb9-7" aria-hidden="true" tabindex="-1"></a>patent77_2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/Box/d-rug/data/uspto_1977_11.csv&quot;</span>)</span>
+<span id="cb9-8"><a href="repetitive-coding-tasks.html#cb9-8" aria-hidden="true" tabindex="-1"></a>patent77_2<span class="sc">$</span>App_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_2<span class="sc">$</span>App_Date))</span>
+<span id="cb9-9"><a href="repetitive-coding-tasks.html#cb9-9" aria-hidden="true" tabindex="-1"></a>patent77_2<span class="sc">$</span>Issue_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_2<span class="sc">$</span>Issue_Date))</span>
+<span id="cb9-10"><a href="repetitive-coding-tasks.html#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="repetitive-coding-tasks.html#cb9-11" aria-hidden="true" tabindex="-1"></a>patent77_3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/Box/d-rug/data/uspto_1977_12.csv&quot;</span>)</span>
+<span id="cb9-12"><a href="repetitive-coding-tasks.html#cb9-12" aria-hidden="true" tabindex="-1"></a>patent77_3<span class="sc">$</span>App_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_3<span class="sc">$</span>App_Date))</span>
+<span id="cb9-13"><a href="repetitive-coding-tasks.html#cb9-13" aria-hidden="true" tabindex="-1"></a>patent77_3<span class="sc">$</span>Issue_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_3<span class="sc">$</span>Issue_Date))</span>
+<span id="cb9-14"><a href="repetitive-coding-tasks.html#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="repetitive-coding-tasks.html#cb9-15" aria-hidden="true" tabindex="-1"></a>patent77_4 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/Box/d-rug/data/uspto_1977_13.csv&quot;</span>)</span>
+<span id="cb9-16"><a href="repetitive-coding-tasks.html#cb9-16" aria-hidden="true" tabindex="-1"></a>patent77_4<span class="sc">$</span>App_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_4<span class="sc">$</span>App_Date))</span>
+<span id="cb9-17"><a href="repetitive-coding-tasks.html#cb9-17" aria-hidden="true" tabindex="-1"></a>patent77_4<span class="sc">$</span>Issue_Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="fu">as.character</span>(patent77_4<span class="sc">$</span>Issue_Date))</span>
+<span id="cb9-18"><a href="repetitive-coding-tasks.html#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># and so on ...</span></span></code></pre></div>
 <p>Each file will look something like this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="repetitive-coding-tasks.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(patent77_1)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="repetitive-coding-tasks.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(patent77_1)</span></code></pre></div>
 <pre><code>##      WKU               Title              App_Date         
-##  Length:1484        Length:1484        Min.   :1960-10-18  
-##  Class :character   Class :character   1st Qu.:1974-12-26  
-##  Mode  :character   Mode  :character   Median :1975-05-28  
-##                                        Mean   :1975-02-22  
-##                                        3rd Qu.:1975-09-25  
-##                                        Max.   :1976-07-01  
+##  Length:1187        Length:1187        Min.   :1963-10-18  
+##  Class :character   Class :character   1st Qu.:1975-03-25  
+##  Mode  :character   Mode  :character   Median :1975-08-06  
+##                                        Mean   :1975-06-03  
+##                                        3rd Qu.:1975-12-05  
+##                                        Max.   :1976-09-09  
 ##    Issue_Date           Inventor           Assignee          ICL_Class        
-##  Min.   :1977-01-04   Length:1484        Length:1484        Length:1484       
-##  1st Qu.:1977-01-04   Class :character   Class :character   Class :character  
-##  Median :1977-01-04   Mode  :character   Mode  :character   Mode  :character  
-##  Mean   :1977-01-04                                                           
-##  3rd Qu.:1977-01-04                                                           
-##  Max.   :1977-01-04                                                           
+##  Min.   :1977-03-08   Length:1187        Length:1187        Length:1187       
+##  1st Qu.:1977-03-08   Class :character   Class :character   Class :character  
+##  Median :1977-03-08   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :1977-03-08                                                           
+##  3rd Qu.:1977-03-08                                                           
+##  Max.   :1977-03-08                                                           
 ##   References           Claims         
-##  Length:1484        Length:1484       
+##  Length:1187        Length:1187       
 ##  Class :character   Class :character  
 ##  Mode  :character   Mode  :character  
 ##                                       
@@ -255,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functions-can-be-like-personalized-mini-packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="function-writing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -277,7 +276,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/d-rug/realworld_functions_iteration/edit/master/01_repetitive_coding_tasks.Rmd",
+"link": "https://github.com/d-rug/realworld_functions2/edit/master/01_repetitive_coding_tasks.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -285,7 +284,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/d-rug/realworld_functions_iteration/blob/master/01_repetitive_coding_tasks.Rmd",
+"link": "https://github.com/d-rug/realworld_functions2/blob/master/01_repetitive_coding_tasks.Rmd",
 "text": null
 },
 "download": null,

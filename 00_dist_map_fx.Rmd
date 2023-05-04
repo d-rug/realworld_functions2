@@ -8,6 +8,8 @@ You may often find yourself in a situation where you need to do the same thing (
 The first step is to call GBIF and import the dataset of species occurrences
 
 ```{r}
+library(rgbif)
+library(ggplot2)
 
 GBIF_Frax = occ_search(scientificName = "Fraxinus velutina", hasCoordinate = TRUE, basisOfRecord = "PRESERVED_SPECIMEN")
 
