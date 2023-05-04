@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Iterating | Real-world function writing</title>
+  <meta name="description" content="Iterating | Real-world function writing" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Iterating | Real-world function writing" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="d-rug/realworld_functions_iteration" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Iterating | Real-world function writing" />
+  
+  
+  
+
+<meta name="author" content="Liza Wood" />
+
+
+<meta name="date" content="2022-10-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="function-writing.html"/>
+<link rel="next" href="putting-it-together.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://d-rug.github.io/">
+  <img src="https://github.com/d-rug/d-rug.github.io/raw/main/DRUG_final_cobalt.png" style="height: 100%; width: 100%; object-fit: contain" />
+</a></li>
+<li><a href="./" style="font-size: 18px">Real-world function writing</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="repetitive-coding-tasks.html"><a href="repetitive-coding-tasks.html"><i class="fa fa-check"></i>Repetitive coding tasks</a></li>
+<li class="chapter" data-level="" data-path="function-writing.html"><a href="function-writing.html"><i class="fa fa-check"></i>Function writing</a></li>
+<li class="chapter" data-level="" data-path="iterating.html"><a href="iterating.html"><i class="fa fa-check"></i>Iterating</a></li>
+<li class="chapter" data-level="" data-path="putting-it-together.html"><a href="putting-it-together.html"><i class="fa fa-check"></i>Putting it together</a></li>
+<li class="divider"></li>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+  <img alt="CC BY-SA 4.0" src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg" style="float: right; padding-right: 10px;" />
+</a>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Real-world function writing</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="iterating" class="section level1 unnumbered hasAnchor">
+<h1>Iterating<a href="iterating.html#iterating" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>There are lots of ways to iterate: apply functions, map function, and for loops are among the most popular. We’re going to walk through two ways: for loops, first to discuss the logic of iteration, then the apply function, for speed and smoother coding.</p>
+<p>So, what we’re trying to do is NOT this:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="iterating.html#cb14-1" aria-hidden="true" tabindex="-1"></a>patent77_1 <span class="ot">&lt;-</span> <span class="fu">process_patents</span>(<span class="at">filepath =</span> <span class="st">&quot;~/Box/d-rug/data/uspto_1977_1.csv&quot;</span>)</span>
+<span id="cb14-2"><a href="iterating.html#cb14-2" aria-hidden="true" tabindex="-1"></a>patent77_2 <span class="ot">&lt;-</span> <span class="fu">process_patents</span>(<span class="at">filepath =</span> <span class="st">&quot;~/Box/d-rug/data/uspto_1977_2.csv&quot;</span>)</span>
+<span id="cb14-3"><a href="iterating.html#cb14-3" aria-hidden="true" tabindex="-1"></a>patent77_3 <span class="ot">&lt;-</span> <span class="fu">process_patents</span>(<span class="at">filepath =</span> <span class="st">&quot;~/Box/d-rug/data/uspto_1977_3.csv&quot;</span>)</span>
+<span id="cb14-4"><a href="iterating.html#cb14-4" aria-hidden="true" tabindex="-1"></a>patent77_4 <span class="ot">&lt;-</span> <span class="fu">process_patents</span>(<span class="at">filepath =</span> <span class="st">&quot;~/Box/d-rug/data/uspto_1977_4.csv&quot;</span>)</span>
+<span id="cb14-5"><a href="iterating.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># And so on...</span></span>
+<span id="cb14-6"><a href="iterating.html#cb14-6" aria-hidden="true" tabindex="-1"></a>patents <span class="ot">&lt;-</span> <span class="fu">rbind</span>(patent77_1, patent77_2, patent77_3, patent77_4)</span></code></pre></div>
+<p>So again, what is it here that changes every time? The filepath. This makes it an easy candidate for looping through, were each loop inputs a new filepath.</p>
+<p>The key here is understanding the use of the index, i, and how it relates to the function you want to run. In this case, we want to run through the loop 52 times, each time printing a new filepath. So here is the basic logic of the loop.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="iterating.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">list.files</span>(<span class="st">&quot;~/Box/d-rug/data/&quot;</span>, <span class="at">full.names =</span> T)){</span>
+<span id="cb15-2"><a href="iterating.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb15-3"><a href="iterating.html#cb15-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_1.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_10.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_11.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_12.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_13.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_14.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_15.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_16.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_17.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_18.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_19.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_2.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_20.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_21.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_22.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_23.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_24.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_25.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_26.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_27.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_28.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_29.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_3.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_30.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_31.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_32.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_33.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_34.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_35.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_36.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_37.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_38.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_39.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_4.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_40.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_41.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_42.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_43.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_44.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_45.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_46.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_47.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_48.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_49.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_5.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_50.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_51.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_52.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_6.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_7.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_8.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1977_9.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_1.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_10.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_11.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_12.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_13.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_14.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_15.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_16.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_17.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_18.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_19.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_2.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_20.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_21.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_22.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_23.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_24.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_25.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_26.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_27.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_28.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_29.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_3.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_30.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_31.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_32.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_33.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_34.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_35.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_36.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_37.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_38.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_39.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_4.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_40.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_41.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_42.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_43.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_44.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_45.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_46.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_47.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_48.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_49.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_5.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_50.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_51.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_52.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_6.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_7.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_8.csv&quot;
+## [1] &quot;/Users/lizawood/Box/d-rug/data//uspto_1978_9.csv&quot;</code></pre>
+<p>Now that we got that, we need to understand how to incorporate that filepath into the function. Because we want to fun the <code>process_patents()</code> function on each filepath, and i is the value of the filepath, this is what we want to insert. Let’s give it a try</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="iterating.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">list.files</span>(<span class="st">&quot;~/Box/d-rug/data/&quot;</span>, <span class="at">full.names =</span> T)){</span>
+<span id="cb17-2"><a href="iterating.html#cb17-2" aria-hidden="true" tabindex="-1"></a>    patents <span class="ot">&lt;-</span> <span class="fu">process_patents</span>(i)</span>
+<span id="cb17-3"><a href="iterating.html#cb17-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-4"><a href="iterating.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(patents)</span></code></pre></div>
+<pre><code>##      WKU               Title              App_Date         
+##  Length:1424        Length:1424        Min.   :1957-01-04  
+##  Class :character   Class :character   1st Qu.:1976-02-17  
+##  Mode  :character   Mode  :character   Median :1976-06-30  
+##                                        Mean   :1976-05-13  
+##                                        3rd Qu.:1976-10-28  
+##                                        Max.   :1977-08-18  
+##    Issue_Date           Inventor           Assignee          ICL_Class        
+##  Min.   :1978-02-28   Length:1424        Length:1424        Length:1424       
+##  1st Qu.:1978-02-28   Class :character   Class :character   Class :character  
+##  Median :1978-02-28   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :1978-02-28                                                           
+##  3rd Qu.:1978-02-28                                                           
+##  Max.   :1978-02-28                                                           
+##   References           Claims         
+##  Length:1424        Length:1424       
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+## </code></pre>
+<p>Something’s off here – we get an output but it is small and when we look at the issue dates we see all the last week of December. So we actually only have the last week worth of data. This is similar to what happened when we didn’t return the dataframe in the function – even though the loop runs through each week, it overwrites that output each time with the following week until the final product is only the last iteration. So one more step helps us get past this, which is to create an empty data frame outside of the loop, then rbind to that empty dataframe over each iteration (binding helps us grow that data frame, rather than overwrite it). I’m also going to measure how long this takes using the `Sys.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="iterating.html#cb19-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb19-2"><a href="iterating.html#cb19-2" aria-hidden="true" tabindex="-1"></a>patents <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb19-3"><a href="iterating.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">list.files</span>(<span class="st">&quot;~/Box/d-rug/data/&quot;</span>, <span class="at">full.names =</span> T)){</span>
+<span id="cb19-4"><a href="iterating.html#cb19-4" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">process_patents</span>(i)</span>
+<span id="cb19-5"><a href="iterating.html#cb19-5" aria-hidden="true" tabindex="-1"></a>    patents <span class="ot">&lt;-</span> <span class="fu">rbind</span>(patents, df)</span>
+<span id="cb19-6"><a href="iterating.html#cb19-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-7"><a href="iterating.html#cb19-7" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span></code></pre></div>
+<p>So what did we get?</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="iterating.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(patents)</span></code></pre></div>
+<pre><code>##      WKU               Title              App_Date         
+##  Length:140411      Length:140411      Min.   :0975-11-06  
+##  Class :character   Class :character   1st Qu.:1975-10-20  
+##  Mode  :character   Mode  :character   Median :1976-05-13  
+##                                        Mean   :1976-06-02  
+##                                        3rd Qu.:1976-12-06  
+##                                        Max.   :9176-06-01  
+##                                        NA&#39;s   :2           
+##    Issue_Date           Inventor           Assignee          ICL_Class        
+##  Min.   :1974-01-25   Length:140411      Length:140411      Length:140411     
+##  1st Qu.:1977-07-05   Class :character   Class :character   Class :character  
+##  Median :1978-01-03   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :1978-01-19                                                           
+##  3rd Qu.:1978-07-11                                                           
+##  Max.   :9177-06-21                                                           
+##  NA&#39;s   :1                                                                    
+##   References           Claims         
+##  Length:140411      Length:140411     
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+##                                       
+## </code></pre>
+<p>That’s more like it!</p>
+<p>But how long did it take?</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="iterating.html#cb22-1" aria-hidden="true" tabindex="-1"></a>t2 <span class="sc">-</span> t1</span></code></pre></div>
+<pre><code>## Time difference of 14.26673 secs</code></pre>
+<p>For loops can be slow, so let’s now switch this iteration to the <code>apply</code> approach.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="iterating.html#cb24-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb24-2"><a href="iterating.html#cb24-2" aria-hidden="true" tabindex="-1"></a>patents <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">list.files</span>(<span class="st">&quot;~/Box/d-rug/data/&quot;</span>, <span class="at">full.names =</span> T),</span>
+<span id="cb24-3"><a href="iterating.html#cb24-3" aria-hidden="true" tabindex="-1"></a>                            process_patents)</span></code></pre></div>
+<pre><code>## Warning: 1 failed to parse.
+
+## Warning: 1 failed to parse.
+
+## Warning: 1 failed to parse.</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="iterating.html#cb26-1" aria-hidden="true" tabindex="-1"></a>patent_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, patents)</span>
+<span id="cb26-2"><a href="iterating.html#cb26-2" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span></code></pre></div>
+<p>We get the same output:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="iterating.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(patent_df)</span></code></pre></div>
+<pre><code>##      WKU               Title              App_Date         
+##  Length:140411      Length:140411      Min.   :0975-11-06  
+##  Class :character   Class :character   1st Qu.:1975-10-20  
+##  Mode  :character   Mode  :character   Median :1976-05-13  
+##                                        Mean   :1976-06-02  
+##                                        3rd Qu.:1976-12-06  
+##                                        Max.   :9176-06-01  
+##                                        NA&#39;s   :2           
+##    Issue_Date           Inventor           Assignee          ICL_Class        
+##  Min.   :1974-01-25   Length:140411      Length:140411      Length:140411     
+##  1st Qu.:1977-07-05   Class :character   Class :character   Class :character  
+##  Median :1978-01-03   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :1978-01-19                                                           
+##  3rd Qu.:1978-07-11                                                           
+##  Max.   :9177-06-21                                                           
+##  NA&#39;s   :1                                                                    
+##   References           Claims         
+##  Length:140411      Length:140411     
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+##                                       
+## </code></pre>
+<p>And how long did it take? Right now this seems like a marginal gain, but over time loops gets slower and slower, whereas apply functions do not, so consider this when choosing.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="iterating.html#cb29-1" aria-hidden="true" tabindex="-1"></a>t2 <span class="sc">-</span> t1</span></code></pre></div>
+<pre><code>## Time difference of 8.232988 secs</code></pre>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="function-writing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="putting-it-together.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/d-rug/realworld_functions_iteration/edit/master/03_iterating.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/d-rug/realworld_functions_iteration/blob/master/03_iterating.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

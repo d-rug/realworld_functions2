@@ -1,0 +1,43 @@
+
+# Repetitive coding tasks {-}
+
+The second thing functions are super useful for is iterating processes. Sometime we need to run the same few lines of code hundreds of times. 
+
+This is true in this (real-world) example of working with US patent data. This (very clunky) database allows you to download all of the patents granted **by week**. What's more is that the data are not so clean, and so each csv requires some cleaning be done on each of them. So if we wanted to aggregate clean patent data over multiple weeks, months, or years, we would need to run the same chunk of code (reading in and cleaning the data) over 100 times, each time with only minor alteration. This is the kind of thing that we can use function writing and iteration to our advantage.
+
+Note: How should we even be reading in and storing lots of data like this? I store my data on Box and download the Box app onto my computer so that I can find an easy filepath there. Here are the files I am working with for this example: 104 weeks of US patent data for 1977 and 1978
+```{r}
+list.files("~/Box/d-rug/data")
+```
+
+What would this look like if I were to go through each files one by one...
+
+```{r, warning = F, message = F}
+# Load in that lubridate package first
+library(lubridate)
+patent77_1 <- read.csv("~/Box/d-rug/data/uspto_1977_10.csv")
+patent77_1$App_Date <- ymd(as.character(patent77_1$App_Date))
+patent77_1$Issue_Date <- ymd(as.character(patent77_1$Issue_Date))
+
+patent77_2 <- read.csv("~/Box/d-rug/data/uspto_1977_11.csv")
+patent77_2$App_Date <- ymd(as.character(patent77_2$App_Date))
+patent77_2$Issue_Date <- ymd(as.character(patent77_2$Issue_Date))
+
+patent77_3 <- read.csv("~/Box/d-rug/data/uspto_1977_12.csv")
+patent77_3$App_Date <- ymd(as.character(patent77_3$App_Date))
+patent77_3$Issue_Date <- ymd(as.character(patent77_3$Issue_Date))
+
+patent77_4 <- read.csv("~/Box/d-rug/data/uspto_1977_13.csv")
+patent77_4$App_Date <- ymd(as.character(patent77_4$App_Date))
+patent77_4$Issue_Date <- ymd(as.character(patent77_4$Issue_Date))
+# and so on ...
+```
+
+Each file will look something like this:
+
+```{r}
+summary(patent77_1)
+```
+
+
+... Then do that 100 more times. And if you want to edit it, edit it over 100 times, and again and again until you lose your mind. So how can we make this more efficient?
