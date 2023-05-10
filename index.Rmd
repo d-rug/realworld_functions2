@@ -1,10 +1,10 @@
 ---
-title: Real-world function writing
-author: Liza Wood
+title: Functions and Iterations
+author: Reed Kenny and Tara Pozzi
 date: "`r Sys.Date()`"
 
 github-repo: d-rug/realworld_functions2
-url: "https://d-rug.github.io/realworld_functions2"
+url: "https://d-rug.github.io/functions_iterations"
 
 site: "bookdown::bookdown_site"
 knit: "bookdown::render_book"
@@ -29,7 +29,6 @@ output:
 
 # Overview {-}
 
-This is a mini-lecture walking through the usefulness of function-writing and iteration using an example of reading in a large number of data files from the US Patent Office.
-
+This is a mini-lecture on function-writing and iteration using data from the Global Biodiversity Information Facility. 
 
 
