@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Functions can be like personalized Mini Packages | Real-world function writing</title>
   <meta name="description" content="Functions can be like personalized Mini Packages | Real-world function writing" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Functions can be like personalized Mini Packages | Real-world function writing" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Liza Wood" />
 
 
-<meta name="date" content="2023-05-03" />
+<meta name="date" content="2023-05-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="repetitive-coding-tasks.html"/>
+<link rel="next" href="iteration.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -140,8 +140,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
 <li class="chapter" data-level="" data-path="functions-can-be-like-personalized-mini-packages.html"><a href="functions-can-be-like-personalized-mini-packages.html"><i class="fa fa-check"></i>Functions can be like personalized Mini Packages</a></li>
-<li class="chapter" data-level="" data-path="repetitive-coding-tasks.html"><a href="repetitive-coding-tasks.html"><i class="fa fa-check"></i>Repetitive coding tasks</a></li>
-<li class="chapter" data-level="" data-path="function-writing.html"><a href="function-writing.html"><i class="fa fa-check"></i>Function writing</a></li>
+<li class="chapter" data-level="" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i>Iteration</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="iteration.html"><a href="iteration.html#for-loops"><i class="fa fa-check"></i><b>0.1</b> For Loops</a></li>
+</ul></li>
 <li class="divider"></li>
 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
   <img alt="CC BY-SA 4.0" src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg" style="float: right; padding-right: 10px;" />
@@ -182,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-4"><a href="functions-can-be-like-personalized-mini-packages.html#cb3-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb3-5"><a href="functions-can-be-like-personalized-mini-packages.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(Frax_dat<span class="sc">$</span>scientificName)</span></code></pre></div>
 <p><img src="01_dist_map_fx_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>This is a fairly easy piece of code to turn into a function. If I were to do this with a different species, the only peice of information that changes is the speices name. So in my function, that is what I specify as the variable.</p>
+<p>This is a fairly easy piece of code to turn into a function. If I were to do this with a different species, the only piece of information that changes is the speices name. So in my function, that is what I specify as the variable.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="functions-can-be-like-personalized-mini-packages.html#cb4-1" aria-hidden="true" tabindex="-1"></a> dist_map <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb4-2"><a href="functions-can-be-like-personalized-mini-packages.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  GBIFdata <span class="ot">=</span> <span class="fu">occ_search</span>(<span class="at">scientificName =</span> x, <span class="at">limit =</span> <span class="dv">300</span>, <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>, <span class="at">basisOfRecord =</span> <span class="st">&quot;PRESERVED_SPECIMEN&quot;</span>)</span>
 <span id="cb4-3"><a href="functions-can-be-like-personalized-mini-packages.html#cb4-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> GBIFdata<span class="sc">$</span>data</span>
@@ -199,7 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="01_dist_map_fx_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>I can save that function to a separate script if I want to use it again in the future. I have a directory for my functions “~Desktop/R-functions” where I saved it.</p>
 <p>Now I can call it in any of my other script using the source() function.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="functions-can-be-like-personalized-mini-packages.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;~/Desktop/R_functions/dist_map.R&quot;</span>)</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="functions-can-be-like-personalized-mini-packages.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;~/Documents/R_Projects/D-RUG/iterations/dist_map.R&quot;</span>)</span>
 <span id="cb6-2"><a href="functions-can-be-like-personalized-mini-packages.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="functions-can-be-like-personalized-mini-packages.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dist_map</span>(<span class="st">&quot;Fremontodendron californicum&quot;</span>)</span></code></pre></div>
 <p><img src="01_dist_map_fx_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
@@ -211,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="repetitive-coding-tasks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="iteration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

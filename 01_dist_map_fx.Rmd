@@ -33,7 +33,7 @@ ggplot()+ coord_fixed() + wm +
   theme_bw() + ggtitle(Frax_dat$scientificName)
 ```
 
-This is a fairly easy piece of code to turn into a function. If I were to do this with a different species, the only peice of information that changes is the speices name. So in my function, that is what I specify as the variable. 
+This is a fairly easy piece of code to turn into a function. If I were to do this with a different species, the only piece of information that changes is the speices name. So in my function, that is what I specify as the variable. 
 
 ```{r}
 
@@ -66,7 +66,7 @@ Now I can call it in any of my other script using the source() function.
 
 ```{r}
 
-source("~/Desktop/R_functions/dist_map.R")
+source("~/Documents/R_Projects/D-RUG/iterations/dist_map.R")
 
 dist_map("Fremontodendron californicum")
 
