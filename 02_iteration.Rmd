@@ -29,23 +29,9 @@ The goal of this mini-workshop is to map multiple Fraxinus species in one plot. 
 
 ## Iteration Examples
 
-First, I will need to write a function to download the data.
-
-```{r, function, eval=F, echo=T, warning = F, message = F}
-# Let's create one datafame to start 
-download_data <- function(x){
-  GBIFdata = occ_search(scientificName = x, limit = 300, hasCoordinate = TRUE, basisOfRecord = "PRESERVED_SPECIMEN")
-dat <-  GBIFdata$data
-return(dat)
-}
-
-# test
-df_FP <- download_data("Fraxinus pallisiae")
-```
-
 *For Loops*
 
-Now, let's use this function to download data for other species of Fraxinus. The first method I'll will use is For Loops, which essentially repeats the code you've written across different input values (i). For example,
+The first method I'll will use is For Loops, which essentially repeats the code you've written across different input values (i). For example,
 
 ```{r, for loop example, eval=F, echo=T, warning = F, message = F}
 for(i in 1:10) {
@@ -74,7 +60,7 @@ species_names <- read.csv("fraxinus_species.csv") %>% #I scraped this list off t
 
 species_names
 
-## there's a lot so for time sake let's just select a few species
+## For time sake I'll select the first few species
 species <- c("Fraxinus albicans Buckley", "Fraxinus americana", "Fraxinus angustifolia", "Fraxinus anomala", "Fraxinus apertisquamifera")
 
 ### Let's just select columns of interest across datasets: 
@@ -85,21 +71,16 @@ colnames(df_FP)
 download_data <- function(x){
   GBIFdata <-  occ_search(scientificName = x, limit = 300, hasCoordinate = TRUE, basisOfRecord = "PRESERVED_SPECIMEN")
   dat <-  GBIFdata$data 
-
-dat <- tryCatch( # this tells R to skip over any dataframes that did not have the columns of interest
-  {dat %>%
+  dat <- dat %>%
   filter(scientificName != "NA") %>% #get rid of species name with "NA"
-  dplyr::select(scientificName, decimalLatitude, decimalLongitude)}, 
-  error=function(error_message) {
-            message("Missing column.")
-            message("And below is the error message from R:")
-            message(error_message)
-            return(NA)})
+  dplyr::select(scientificName, decimalLatitude, decimalLongitude)
 return(dat)
 }
 
-## Run for loop again and see if it works
+## create empty data frame
 comb_species <- data.frame()
+
+## Run the for loop
 for(i in species) {
   df <- download_data(i)
   comb_species <- bind_rows(comb_species, df)

@@ -184,88 +184,73 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="iteration-examples" class="section level2 hasAnchor" number="0.2">
 <h2><span class="header-section-number">0.2</span> Iteration Examples<a href="iteration.html#iteration-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>First, I will need to write a function to download the data.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="iteration.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s create one datafame to start </span></span>
-<span id="cb7-2"><a href="iteration.html#cb7-2" aria-hidden="true" tabindex="-1"></a>download_data <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb7-3"><a href="iteration.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  GBIFdata <span class="ot">=</span> <span class="fu">occ_search</span>(<span class="at">scientificName =</span> x, <span class="at">limit =</span> <span class="dv">300</span>, <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>, <span class="at">basisOfRecord =</span> <span class="st">&quot;PRESERVED_SPECIMEN&quot;</span>)</span>
-<span id="cb7-4"><a href="iteration.html#cb7-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span>  GBIFdata<span class="sc">$</span>data</span>
-<span id="cb7-5"><a href="iteration.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(dat)</span>
-<span id="cb7-6"><a href="iteration.html#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-7"><a href="iteration.html#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="iteration.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># test</span></span>
-<span id="cb7-9"><a href="iteration.html#cb7-9" aria-hidden="true" tabindex="-1"></a>df_FP <span class="ot">&lt;-</span> <span class="fu">download_data</span>(<span class="st">&quot;Fraxinus pallisiae&quot;</span>)</span></code></pre></div>
 <p><em>For Loops</em></p>
-<p>Now, let’s use this function to download data for other species of Fraxinus. The first method I’ll will use is For Loops, which essentially repeats the code you’ve written across different input values (i). For example,</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="iteration.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb8-2"><a href="iteration.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb8-3"><a href="iteration.html#cb8-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The first method I’ll will use is For Loops, which essentially repeats the code you’ve written across different input values (i). For example,</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="iteration.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb7-2"><a href="iteration.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb7-3"><a href="iteration.html#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>We will need to create an empty dataframe to save the results of the loop</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="iteration.html#cb9-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">10</span>)</span>
-<span id="cb9-2"><a href="iteration.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="iteration.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb9-4"><a href="iteration.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  results[i] <span class="ot">&lt;-</span> i<span class="sc">*</span><span class="dv">10</span></span>
-<span id="cb9-5"><a href="iteration.html#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="iteration.html#cb8-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">10</span>)</span>
+<span id="cb8-2"><a href="iteration.html#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="iteration.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb8-4"><a href="iteration.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  results[i] <span class="ot">&lt;-</span> i<span class="sc">*</span><span class="dv">10</span></span>
+<span id="cb8-5"><a href="iteration.html#cb8-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Now let’s try to translate this to the GBIF example.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="iteration.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let&#39;s try bringing in multiple species</span></span>
-<span id="cb10-2"><a href="iteration.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## create list of all Fraxinus species</span></span>
-<span id="cb10-3"><a href="iteration.html#cb10-3" aria-hidden="true" tabindex="-1"></a>species_names <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;fraxinus_species.csv&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#I scraped this list off the GBIF website</span></span>
-<span id="cb10-4"><a href="iteration.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Name)<span class="sc">%&gt;%</span></span>
-<span id="cb10-5"><a href="iteration.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.list</span>() </span>
-<span id="cb10-6"><a href="iteration.html#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="iteration.html#cb10-7" aria-hidden="true" tabindex="-1"></a>species_names</span>
-<span id="cb10-8"><a href="iteration.html#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="iteration.html#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="do">## there&#39;s a lot so for time sake let&#39;s just select a few species</span></span>
-<span id="cb10-10"><a href="iteration.html#cb10-10" aria-hidden="true" tabindex="-1"></a>species <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fraxinus albicans Buckley&quot;</span>, <span class="st">&quot;Fraxinus americana&quot;</span>, <span class="st">&quot;Fraxinus angustifolia&quot;</span>, <span class="st">&quot;Fraxinus anomala&quot;</span>, <span class="st">&quot;Fraxinus apertisquamifera&quot;</span>)</span>
-<span id="cb10-11"><a href="iteration.html#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="iteration.html#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Let&#39;s just select columns of interest across datasets: </span></span>
-<span id="cb10-13"><a href="iteration.html#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_FP)</span>
-<span id="cb10-14"><a href="iteration.html#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="do">### Columns we want: &quot;scientificName&quot;, &quot;decimalLatitude&quot;,&quot;decimalLongitude&quot;  </span></span>
-<span id="cb10-15"><a href="iteration.html#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="iteration.html#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Function</span></span>
-<span id="cb10-17"><a href="iteration.html#cb10-17" aria-hidden="true" tabindex="-1"></a>download_data <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb10-18"><a href="iteration.html#cb10-18" aria-hidden="true" tabindex="-1"></a>  GBIFdata <span class="ot">&lt;-</span>  <span class="fu">occ_search</span>(<span class="at">scientificName =</span> x, <span class="at">limit =</span> <span class="dv">300</span>, <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>, <span class="at">basisOfRecord =</span> <span class="st">&quot;PRESERVED_SPECIMEN&quot;</span>)</span>
-<span id="cb10-19"><a href="iteration.html#cb10-19" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span>  GBIFdata<span class="sc">$</span>data </span>
-<span id="cb10-20"><a href="iteration.html#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="iteration.html#cb10-21" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>( <span class="co"># this tells R to skip over any dataframes that did not have the columns of interest</span></span>
-<span id="cb10-22"><a href="iteration.html#cb10-22" aria-hidden="true" tabindex="-1"></a>  {dat <span class="sc">%&gt;%</span></span>
-<span id="cb10-23"><a href="iteration.html#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(scientificName <span class="sc">!=</span> <span class="st">&quot;NA&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#get rid of species name with &quot;NA&quot;</span></span>
-<span id="cb10-24"><a href="iteration.html#cb10-24" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(scientificName, decimalLatitude, decimalLongitude)}, </span>
-<span id="cb10-25"><a href="iteration.html#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">error=</span><span class="cf">function</span>(error_message) {</span>
-<span id="cb10-26"><a href="iteration.html#cb10-26" aria-hidden="true" tabindex="-1"></a>            <span class="fu">message</span>(<span class="st">&quot;Missing column.&quot;</span>)</span>
-<span id="cb10-27"><a href="iteration.html#cb10-27" aria-hidden="true" tabindex="-1"></a>            <span class="fu">message</span>(<span class="st">&quot;And below is the error message from R:&quot;</span>)</span>
-<span id="cb10-28"><a href="iteration.html#cb10-28" aria-hidden="true" tabindex="-1"></a>            <span class="fu">message</span>(error_message)</span>
-<span id="cb10-29"><a href="iteration.html#cb10-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">return</span>(<span class="cn">NA</span>)})</span>
-<span id="cb10-30"><a href="iteration.html#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(dat)</span>
-<span id="cb10-31"><a href="iteration.html#cb10-31" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-32"><a href="iteration.html#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-33"><a href="iteration.html#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Run for loop again and see if it works</span></span>
-<span id="cb10-34"><a href="iteration.html#cb10-34" aria-hidden="true" tabindex="-1"></a>comb_species <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb10-35"><a href="iteration.html#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> species) {</span>
-<span id="cb10-36"><a href="iteration.html#cb10-36" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">download_data</span>(i)</span>
-<span id="cb10-37"><a href="iteration.html#cb10-37" aria-hidden="true" tabindex="-1"></a>  comb_species <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(comb_species, df)</span>
-<span id="cb10-38"><a href="iteration.html#cb10-38" aria-hidden="true" tabindex="-1"></a>} </span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="iteration.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let&#39;s try bringing in multiple species</span></span>
+<span id="cb9-2"><a href="iteration.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## create list of all Fraxinus species</span></span>
+<span id="cb9-3"><a href="iteration.html#cb9-3" aria-hidden="true" tabindex="-1"></a>species_names <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;fraxinus_species.csv&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#I scraped this list off the GBIF website</span></span>
+<span id="cb9-4"><a href="iteration.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Name)<span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="iteration.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.list</span>() </span>
+<span id="cb9-6"><a href="iteration.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="iteration.html#cb9-7" aria-hidden="true" tabindex="-1"></a>species_names</span>
+<span id="cb9-8"><a href="iteration.html#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="iteration.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">## For time sake I&#39;ll select the first few species</span></span>
+<span id="cb9-10"><a href="iteration.html#cb9-10" aria-hidden="true" tabindex="-1"></a>species <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fraxinus albicans Buckley&quot;</span>, <span class="st">&quot;Fraxinus americana&quot;</span>, <span class="st">&quot;Fraxinus angustifolia&quot;</span>, <span class="st">&quot;Fraxinus anomala&quot;</span>, <span class="st">&quot;Fraxinus apertisquamifera&quot;</span>)</span>
+<span id="cb9-11"><a href="iteration.html#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="iteration.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Let&#39;s just select columns of interest across datasets: </span></span>
+<span id="cb9-13"><a href="iteration.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_FP)</span>
+<span id="cb9-14"><a href="iteration.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="do">### Columns we want: &quot;scientificName&quot;, &quot;decimalLatitude&quot;,&quot;decimalLongitude&quot;  </span></span>
+<span id="cb9-15"><a href="iteration.html#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="iteration.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Function</span></span>
+<span id="cb9-17"><a href="iteration.html#cb9-17" aria-hidden="true" tabindex="-1"></a>download_data <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb9-18"><a href="iteration.html#cb9-18" aria-hidden="true" tabindex="-1"></a>  GBIFdata <span class="ot">&lt;-</span>  <span class="fu">occ_search</span>(<span class="at">scientificName =</span> x, <span class="at">limit =</span> <span class="dv">300</span>, <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>, <span class="at">basisOfRecord =</span> <span class="st">&quot;PRESERVED_SPECIMEN&quot;</span>)</span>
+<span id="cb9-19"><a href="iteration.html#cb9-19" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span>  GBIFdata<span class="sc">$</span>data </span>
+<span id="cb9-20"><a href="iteration.html#cb9-20" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb9-21"><a href="iteration.html#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(scientificName <span class="sc">!=</span> <span class="st">&quot;NA&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#get rid of species name with &quot;NA&quot;</span></span>
+<span id="cb9-22"><a href="iteration.html#cb9-22" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(scientificName, decimalLatitude, decimalLongitude)</span>
+<span id="cb9-23"><a href="iteration.html#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(dat)</span>
+<span id="cb9-24"><a href="iteration.html#cb9-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-25"><a href="iteration.html#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="iteration.html#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="do">## create empty data frame</span></span>
+<span id="cb9-27"><a href="iteration.html#cb9-27" aria-hidden="true" tabindex="-1"></a>comb_species <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb9-28"><a href="iteration.html#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="iteration.html#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Run the for loop</span></span>
+<span id="cb9-30"><a href="iteration.html#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> species) {</span>
+<span id="cb9-31"><a href="iteration.html#cb9-31" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">download_data</span>(i)</span>
+<span id="cb9-32"><a href="iteration.html#cb9-32" aria-hidden="true" tabindex="-1"></a>  comb_species <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(comb_species, df)</span>
+<span id="cb9-33"><a href="iteration.html#cb9-33" aria-hidden="true" tabindex="-1"></a>} </span></code></pre></div>
 <p><em>Apply functions</em> Another option for iteration are apply functions in base R. Check out this tutorial for more information: <a href="https://ademos.people.uic.edu/Chapter4.html" class="uri">https://ademos.people.uic.edu/Chapter4.html</a>. They often run faster than for loops &amp; can be a lot simpler to set up!</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="iteration.html#cb11-1" aria-hidden="true" tabindex="-1"></a>comb_species_apply <span class="ot">&lt;-</span> <span class="fu">lapply</span>(species, <span class="at">FUN =</span> download_data) <span class="co">#spits out a list!</span></span>
-<span id="cb11-2"><a href="iteration.html#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="iteration.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># how to go from list to dataframe?</span></span>
-<span id="cb11-4"><a href="iteration.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># do.call calls the function you specify and runs it on the next argument</span></span>
-<span id="cb11-5"><a href="iteration.html#cb11-5" aria-hidden="true" tabindex="-1"></a>comb_species_apply_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;bind_rows&quot;</span>, comb_species_apply) <span class="co">#this will turn the list into a dataframe</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="iteration.html#cb10-1" aria-hidden="true" tabindex="-1"></a>comb_species_apply <span class="ot">&lt;-</span> <span class="fu">lapply</span>(species, <span class="at">FUN =</span> download_data) <span class="co">#spits out a list!</span></span>
+<span id="cb10-2"><a href="iteration.html#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="iteration.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># how to go from list to dataframe?</span></span>
+<span id="cb10-4"><a href="iteration.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># do.call calls the function you specify and runs it on the next argument</span></span>
+<span id="cb10-5"><a href="iteration.html#cb10-5" aria-hidden="true" tabindex="-1"></a>comb_species_apply_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;bind_rows&quot;</span>, comb_species_apply) <span class="co">#this will turn the list into a dataframe</span></span></code></pre></div>
 <p><em>Map functions</em></p>
 <p>Apply functions are very handy, but for those dedicated to tidyverse you might be interested in the map family of functions from the purrr package (which is in the tidyverse suite of packages). Check out this tutorial for more: <a href="https://jennybc.github.io/purrr-tutorial/" class="uri">https://jennybc.github.io/purrr-tutorial/</a></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="iteration.html#cb12-1" aria-hidden="true" tabindex="-1"></a>comb_species_map <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(species, <span class="at">.f =</span> download_data)</span>
-<span id="cb12-2"><a href="iteration.html#cb12-2" aria-hidden="true" tabindex="-1"></a>comb_species_map_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;bind_rows&quot;</span>, comb_species_apply)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="iteration.html#cb11-1" aria-hidden="true" tabindex="-1"></a>comb_species_map <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(species, <span class="at">.f =</span> download_data)</span>
+<span id="cb11-2"><a href="iteration.html#cb11-2" aria-hidden="true" tabindex="-1"></a>comb_species_map_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;bind_rows&quot;</span>, comb_species_apply)</span></code></pre></div>
 </div>
 <div id="final-plot" class="section level2 hasAnchor" number="0.3">
 <h2><span class="header-section-number">0.3</span> Final Plot<a href="iteration.html#final-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now let’s make a nice plot!</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="iteration.html#cb13-1" aria-hidden="true" tabindex="-1"></a>wm <span class="ot">=</span> <span class="fu">borders</span>(<span class="st">&quot;world&quot;</span>, <span class="at">colour=</span><span class="st">&quot;gray50&quot;</span>, <span class="at">fill=</span><span class="st">&quot;gray50&quot;</span>) <span class="co">#map backgroud</span></span>
-<span id="cb13-2"><a href="iteration.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="iteration.html#cb13-3" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>()<span class="sc">+</span> </span>
-<span id="cb13-4"><a href="iteration.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
-<span id="cb13-5"><a href="iteration.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  wm <span class="sc">+</span></span>
-<span id="cb13-6"><a href="iteration.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> comb_species, <span class="fu">aes</span>(<span class="at">x =</span> decimalLongitude, <span class="at">y =</span> decimalLatitude, <span class="at">color =</span> scientificName),<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb13-7"><a href="iteration.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb13-8"><a href="iteration.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="iteration.html#cb12-1" aria-hidden="true" tabindex="-1"></a>wm <span class="ot">=</span> <span class="fu">borders</span>(<span class="st">&quot;world&quot;</span>, <span class="at">colour=</span><span class="st">&quot;gray50&quot;</span>, <span class="at">fill=</span><span class="st">&quot;gray50&quot;</span>) <span class="co">#map backgroud</span></span>
+<span id="cb12-2"><a href="iteration.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="iteration.html#cb12-3" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>()<span class="sc">+</span> </span>
+<span id="cb12-4"><a href="iteration.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
+<span id="cb12-5"><a href="iteration.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  wm <span class="sc">+</span></span>
+<span id="cb12-6"><a href="iteration.html#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> comb_species, <span class="fu">aes</span>(<span class="at">x =</span> decimalLongitude, <span class="at">y =</span> decimalLatitude, <span class="at">color =</span> scientificName),<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="iteration.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb12-8"><a href="iteration.html#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
 <p><img src="images/Screen%20Shot%202023-05-11%20at%208.39.48%20AM.png" /></p>
 
 </div>
