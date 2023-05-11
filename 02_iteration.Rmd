@@ -146,7 +146,7 @@ comb_species_map_df <- do.call("bind_rows", comb_species_apply)
 
 For fun, let's see how the timing compares between the for loop and the apply functions. 
 
-```{r, timing, eval = F, warning = F, message = F}
+```{r, timing, eval = T, warning = F, message = F}
 ## For Loop
 system.time({ 
   rm(comb_species)
