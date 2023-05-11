@@ -2,6 +2,7 @@
 output:
   pdf_document: default
   html_document: default
+eval: FALSE
 ---
 
 # Iteration {-}
@@ -16,26 +17,11 @@ There are three main ways to do iterations:
 2. Apply functions
 3. Map functions
 
-## For Loops
+## Objective
 
-For Loops repeat the code you've written across different input values (i). For example, 
-```{r}
-for(i in 1:10) {
-  print(i)
-}
-```
+Say I want to map multiple Fraxinus species all in one plot. In order to do so, I will need to download the data for each Fraxinus species, combine each respective dataset into one dataframe, and then can use this dataframe to plot the range of multiple species. 
 
-We will need to create an empty dataframe to save the results of the loop
-
-```{r}
-results <- rep(NA, 10)
-
-for(i in 1:10) {
-  results[i] <- i*10
-}
-```
-
-Now let's try to translate this to the example Reed shared on plotting the range of plant species. Let's keeping working with that example, but bring in multiple Fraxinus species. To do so, I'm going to create a new function for downloading the data.
+First, I will need to write a function to download the data.
 
 ```{r, function}
 library(rgbif)
@@ -53,34 +39,49 @@ return(dat)
 df_FP <- download_data("Fraxinus pallisiae")
 ```
 
+# Iteration Examples
+
+## For Loops
+
+Now, let's use this function to download data for other species of Fraxinus. The first method I'll will use is For Loops, which essentially repeats the code you've written across different input values (i). For example, 
+
+```{r, for loop example}
+for(i in 1:10) {
+  print(i)
+}
+```
+
+We will need to create an empty dataframe to save the results of the loop
+
+```{r, for loop saving}
+results <- rep(NA, 10)
+
+for(i in 1:10) {
+  results[i] <- i*10
+}
+```
+
+Now let's try to translate this to the GBIF example.
+
 ```{r, for loop}
 # Now let's try bringing in multiple species
 ## create list of all Fraxinus species
-species_names <- read.csv("fraxinus_species.csv") %>%
+species_names <- read.csv("fraxinus_species.csv") %>% #I scraped this list off the GBIF website
   dplyr::select(Name)%>%
   as.list() 
+
 species_names
 
 ## there's a lot so for time sake let's just select a few species
 species <- c("Fraxinus albicans Buckley", "Fraxinus americana", "Fraxinus angustifolia", "Fraxinus anomala", "Fraxinus apertisquamifera")
 
-# iterate over each species
-for(i in species) {
-  download_data(i)
-}
-## downloads data for all species but they are not saved!
-
-## create a dataframe to save data into
-for(i in species) {
-  df <- download_data(i)
-}
-## oops! not all of our datasets save... looks like it only saved the data for the last i
-
 ## we need to create an empty dataframe for the loop to fill!
-comb_species_test <- data.frame()
+comb_species <- data.frame()
+
+## for loop
 for(i in species) {
   df <- download_data(i)
-  comb_species_test <- bind_rows(comb_species_test, df)
+  comb_species <- bind_rows(comb_species, df)
 }
 ## now we get this error that numbers of columns of arguments do not match
 
@@ -113,6 +114,7 @@ for(i in species) {
 } 
 ```
 
+## Apply functions
 Another option for iteration are apply functions in base R. Check out this tutorial for more information: https://ademos.people.uic.edu/Chapter4.html. They often run faster than for loops & can be a lot simpler to set up!
 
 
@@ -129,6 +131,8 @@ comb_species_apply <- lapply(species, FUN = download_data) #spits out a list!
 comb_species_apply_df <- do.call("bind_rows", comb_species_apply) #this will turn the list into a dataframe
 # this also helps with iterating through mulitple files
 ```
+
+## Map functions
 
 Apply functions are very handy, but for those dedicated to tidyverse you might be interested in the map family of functions from the purrr package (which is in the tidyverse suite of packages). Check out this tutorial for more: https://jennybc.github.io/purrr-tutorial/
 
@@ -157,7 +161,10 @@ system.time(comb_species_apply <- lapply(species, FUN = download_data))
    
 ```
 
+# Final Plot
+
 Now let's make a nice plot!
+
 ```{r, plot}
 
 wm = borders("world", colour="gray50", fill="gray50") #map backgroud
@@ -169,4 +176,3 @@ ggplot()+
   theme_bw() +
   theme(legend.position = "bottom")
 ```
-
