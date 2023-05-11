@@ -244,8 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-36"><a href="iteration.html#cb10-36" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">download_data</span>(i)</span>
 <span id="cb10-37"><a href="iteration.html#cb10-37" aria-hidden="true" tabindex="-1"></a>  comb_species <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(comb_species, df)</span>
 <span id="cb10-38"><a href="iteration.html#cb10-38" aria-hidden="true" tabindex="-1"></a>} </span></code></pre></div>
-<p><em>Apply functions</em>
-Another option for iteration are apply functions in base R. Check out this tutorial for more information: <a href="https://ademos.people.uic.edu/Chapter4.html" class="uri">https://ademos.people.uic.edu/Chapter4.html</a>. They often run faster than for loops &amp; can be a lot simpler to set up!</p>
+<p><em>Apply functions</em> Another option for iteration are apply functions in base R. Check out this tutorial for more information: <a href="https://ademos.people.uic.edu/Chapter4.html" class="uri">https://ademos.people.uic.edu/Chapter4.html</a>. They often run faster than for loops &amp; can be a lot simpler to set up!</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="iteration.html#cb11-1" aria-hidden="true" tabindex="-1"></a>?apply</span>
 <span id="cb11-2"><a href="iteration.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># just the apply function requires a matrix or dataframe to loop over, but this isn&#39;t the format of our input value which is a list...let&#39;s look at other options!</span></span>
 <span id="cb11-3"><a href="iteration.html#cb11-3" aria-hidden="true" tabindex="-1"></a>?lapply</span>
@@ -274,6 +273,7 @@ Another option for iteration are apply functions in base R. Check out this tutor
 <span id="cb13-6"><a href="iteration.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> comb_species, <span class="fu">aes</span>(<span class="at">x =</span> decimalLongitude, <span class="at">y =</span> decimalLatitude, <span class="at">color =</span> scientificName),<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb13-7"><a href="iteration.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb13-8"><a href="iteration.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<p><img src="images/Screen%20Shot%202023-05-11%20at%208.39.48%20AM.png" /></p>
 
 </div>
 </div>
