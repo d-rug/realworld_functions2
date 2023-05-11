@@ -4,12 +4,7 @@ output:
   html_document: default
 eval: FALSE
 ---
-```{r, echo = F, warning = F, message = F}
-library(rgbif)
-library(ggplot2)
-library(tidyverse)
 
-```
 # Iteration {-}
 
 Up until this point, we have been able to download and map the range of one plant species at a time. However, what if we want to download  the data for and create a range map of several plant species? This is where iteration comes into play!
@@ -30,7 +25,8 @@ The goal of this mini-workshop is to map multiple Fraxinus species in one plot. 
 
 First, I will need to write a function to download the data.
 
-```{r, function, eval = F, warning = F, message = F}
+
+```r
 # Let's create one datafame to start 
 download_data <- function(x){
   GBIFdata = occ_search(scientificName = x, limit = 300, hasCoordinate = TRUE, basisOfRecord = "PRESERVED_SPECIMEN")
@@ -47,7 +43,8 @@ df_FP <- download_data("Fraxinus pallisiae")
 
 Now, let's use this function to download data for other species of Fraxinus. The first method I'll will use is For Loops, which essentially repeats the code you've written across different input values (i). For example, 
 
-```{r, for loop example, eval = F, warning = F, message = F}
+
+```r
 for(i in 1:10) {
   print(i)
 }
@@ -55,7 +52,8 @@ for(i in 1:10) {
 
 We will need to create an empty dataframe to save the results of the loop
 
-```{r, for loop saving, eval = F, warning = F, message = F}
+
+```r
 results <- rep(NA, 10)
 
 for(i in 1:10) {
@@ -65,7 +63,8 @@ for(i in 1:10) {
 
 Now let's try to translate this to the GBIF example.
 
-```{r, for loop, eval = F, warning = F, message = F}
+
+```r
 # Now let's try bringing in multiple species
 ## create list of all Fraxinus species
 species_names <- read.csv("fraxinus_species.csv") %>% #I scraped this list off the GBIF website
@@ -120,7 +119,8 @@ for(i in species) {
 Another option for iteration are apply functions in base R. Check out this tutorial for more information: https://ademos.people.uic.edu/Chapter4.html. They often run faster than for loops & can be a lot simpler to set up!
 
 
-```{r, apply, eval = F, warning = F, message = F}
+
+```r
 ?apply
 # just the apply function requires a matrix or dataframe to loop over, but this isn't the format of our input value which is a list...let's look at other options!
 ?lapply
@@ -131,13 +131,15 @@ comb_species_apply <- lapply(species, FUN = download_data) #spits out a list!
 # how to go from list to dataframe?
 # do.call calls the function you specify and runs it on the next argument
 comb_species_apply_df <- do.call("bind_rows", comb_species_apply) #this will turn the list into a dataframe
+# this also helps with iterating through mulitple files
 ```
 
 *Map functions*
 
 Apply functions are very handy, but for those dedicated to tidyverse you might be interested in the map family of functions from the purrr package (which is in the tidyverse suite of packages). Check out this tutorial for more: https://jennybc.github.io/purrr-tutorial/
 
-```{r, map, eval = F, warning = F, message = F}
+
+```r
 ?purrr::map
 
 comb_species_map <- purrr::map(species, .f = download_data)
@@ -146,7 +148,8 @@ comb_species_map_df <- do.call("bind_rows", comb_species_apply)
 
 For fun, let's see how the timing compares between the for loop and the apply functions. 
 
-```{r, timing, eval = F, warning = F, message = F}
+
+```r
 ## For Loop
 system.time({ 
   rm(comb_species)
@@ -159,21 +162,10 @@ for(i in species) {
 
 ## Apply
 system.time(comb_species_apply <- lapply(species, FUN = download_data))
-   
 ```
 
 ## Final Plot
 
 Now let's make a nice plot!
 
-```{r, plot, warning = F, message = F}
 
-wm = borders("world", colour="gray50", fill="gray50") #map backgroud
-
-ggplot()+ 
-  coord_fixed() + 
-  wm +
-  geom_point(data = comb_species, aes(x = decimalLongitude, y = decimalLatitude, color = scientificName),size = 0.5) +
-  theme_bw() +
-  theme(legend.position = "bottom")
-```

@@ -1,6 +1,0 @@
-objective
-iteration-examples
-for-loops
-apply-functions
-map-functions
-final-plot

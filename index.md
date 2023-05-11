@@ -1,0 +1,34 @@
+---
+title: Functions and Iterations
+author: Reed Kenny and Tara Pozzi
+date: "2023-05-10"
+
+github-repo: d-rug/realworld_functions2
+url: "https://d-rug.github.io/realworld_functions2"
+
+site: "bookdown::bookdown_site"
+knit: "bookdown::render_book"
+output:
+  bookdown::gitbook:
+    config:
+      toc:
+        before: |
+          <li><a href="https://d-rug.github.io/">
+            <img src="https://github.com/d-rug/d-rug.github.io/raw/main/DRUG_final_cobalt.png" style="height: 100%; width: 100%; object-fit: contain" />
+          </a></li>
+          <li><a href="./" style="font-size: 18px">Functions and Iterations</a></li>
+        after: |
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+            <img alt="CC BY-SA 4.0" src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg" style="float: right; padding-right: 10px;" />
+          </a>
+        collapse: section
+      sharing: no
+      view: https://github.com/d-rug/realworld_functions2/blob/master/%s
+      edit: https://github.com/d-rug/realworld_functions2/edit/master/%s
+---
+
+# Overview {-}
+
+This is a mini-lecture on function-writing and iteration using data from the Global Biodiversity Information Facility. 
+
+
