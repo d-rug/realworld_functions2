@@ -109,11 +109,6 @@ for(i in species) {
 *Apply functions* Another option for iteration are apply functions in base R. Check out this tutorial for more information: <https://ademos.people.uic.edu/Chapter4.html>. They often run faster than for loops & can be a lot simpler to set up!
 
 ```{r, apply, eval=F, echo=T, warning = F, message = F}
-?apply
-# just the apply function requires a matrix or dataframe to loop over, but this isn't the format of our input value which is a list...let's look at other options!
-?lapply
-?sapply
-
 comb_species_apply <- lapply(species, FUN = download_data) #spits out a list!
 
 # how to go from list to dataframe?
@@ -126,8 +121,6 @@ comb_species_apply_df <- do.call("bind_rows", comb_species_apply) #this will tur
 Apply functions are very handy, but for those dedicated to tidyverse you might be interested in the map family of functions from the purrr package (which is in the tidyverse suite of packages). Check out this tutorial for more: <https://jennybc.github.io/purrr-tutorial/>
 
 ```{r, map, eval=F, echo=T, warning = F, message = F}
-?purrr::map
-
 comb_species_map <- purrr::map(species, .f = download_data)
 comb_species_map_df <- do.call("bind_rows", comb_species_apply)
 ```

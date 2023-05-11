@@ -245,22 +245,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-37"><a href="iteration.html#cb10-37" aria-hidden="true" tabindex="-1"></a>  comb_species <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(comb_species, df)</span>
 <span id="cb10-38"><a href="iteration.html#cb10-38" aria-hidden="true" tabindex="-1"></a>} </span></code></pre></div>
 <p><em>Apply functions</em> Another option for iteration are apply functions in base R. Check out this tutorial for more information: <a href="https://ademos.people.uic.edu/Chapter4.html" class="uri">https://ademos.people.uic.edu/Chapter4.html</a>. They often run faster than for loops &amp; can be a lot simpler to set up!</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="iteration.html#cb11-1" aria-hidden="true" tabindex="-1"></a>?apply</span>
-<span id="cb11-2"><a href="iteration.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># just the apply function requires a matrix or dataframe to loop over, but this isn&#39;t the format of our input value which is a list...let&#39;s look at other options!</span></span>
-<span id="cb11-3"><a href="iteration.html#cb11-3" aria-hidden="true" tabindex="-1"></a>?lapply</span>
-<span id="cb11-4"><a href="iteration.html#cb11-4" aria-hidden="true" tabindex="-1"></a>?sapply</span>
-<span id="cb11-5"><a href="iteration.html#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="iteration.html#cb11-6" aria-hidden="true" tabindex="-1"></a>comb_species_apply <span class="ot">&lt;-</span> <span class="fu">lapply</span>(species, <span class="at">FUN =</span> download_data) <span class="co">#spits out a list!</span></span>
-<span id="cb11-7"><a href="iteration.html#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="iteration.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># how to go from list to dataframe?</span></span>
-<span id="cb11-9"><a href="iteration.html#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># do.call calls the function you specify and runs it on the next argument</span></span>
-<span id="cb11-10"><a href="iteration.html#cb11-10" aria-hidden="true" tabindex="-1"></a>comb_species_apply_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;bind_rows&quot;</span>, comb_species_apply) <span class="co">#this will turn the list into a dataframe</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="iteration.html#cb11-1" aria-hidden="true" tabindex="-1"></a>comb_species_apply <span class="ot">&lt;-</span> <span class="fu">lapply</span>(species, <span class="at">FUN =</span> download_data) <span class="co">#spits out a list!</span></span>
+<span id="cb11-2"><a href="iteration.html#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="iteration.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># how to go from list to dataframe?</span></span>
+<span id="cb11-4"><a href="iteration.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># do.call calls the function you specify and runs it on the next argument</span></span>
+<span id="cb11-5"><a href="iteration.html#cb11-5" aria-hidden="true" tabindex="-1"></a>comb_species_apply_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;bind_rows&quot;</span>, comb_species_apply) <span class="co">#this will turn the list into a dataframe</span></span></code></pre></div>
 <p><em>Map functions</em></p>
 <p>Apply functions are very handy, but for those dedicated to tidyverse you might be interested in the map family of functions from the purrr package (which is in the tidyverse suite of packages). Check out this tutorial for more: <a href="https://jennybc.github.io/purrr-tutorial/" class="uri">https://jennybc.github.io/purrr-tutorial/</a></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="iteration.html#cb12-1" aria-hidden="true" tabindex="-1"></a>?purrr<span class="sc">::</span>map</span>
-<span id="cb12-2"><a href="iteration.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="iteration.html#cb12-3" aria-hidden="true" tabindex="-1"></a>comb_species_map <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(species, <span class="at">.f =</span> download_data)</span>
-<span id="cb12-4"><a href="iteration.html#cb12-4" aria-hidden="true" tabindex="-1"></a>comb_species_map_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;bind_rows&quot;</span>, comb_species_apply)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="iteration.html#cb12-1" aria-hidden="true" tabindex="-1"></a>comb_species_map <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(species, <span class="at">.f =</span> download_data)</span>
+<span id="cb12-2"><a href="iteration.html#cb12-2" aria-hidden="true" tabindex="-1"></a>comb_species_map_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&quot;bind_rows&quot;</span>, comb_species_apply)</span></code></pre></div>
 </div>
 <div id="final-plot" class="section level2 hasAnchor" number="0.3">
 <h2><span class="header-section-number">0.3</span> Final Plot<a href="iteration.html#final-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
